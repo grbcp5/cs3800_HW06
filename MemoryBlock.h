@@ -7,40 +7,43 @@
 
 #include <stdatomic.h>
 
+/* Typedefs */
 struct MemoryBlock;
 
 typedef MemoryBlock *MemoryBlockPtr;
 
+typedef unsigned char byte;
+
 struct MemoryBlock {
     size_t size;
-    void *start_position;
+    byte *data;
     bool occupied;
     MemoryBlock *before;
     MemoryBlock *next;
 
     MemoryBlock() :
         size( 0 ),
-        start_position( NULL ),
+        data( NULL ),
         occupied( false ),
         before( NULL ),
         next( NULL ) {}
 
-    MemoryBlock( const size_t s, void *pos, bool isOccupied ) :
+    MemoryBlock( const size_t s, byte *pos, bool isOccupied ) :
         size( s ),
-        start_position( pos ),
+        data( pos ),
         occupied( isOccupied ),
         before( NULL ),
         next( NULL ) {}
 
     MemoryBlock(
         const size_t s,
-        void *pos,
+        byte *pos,
         bool o,
         MemoryBlock *b,
         MemoryBlock *n
     ) :
         size( s ),
-        start_position( pos ),
+        data( pos ),
         occupied( o ),
         before( b ),
         next( n ) {}
@@ -50,9 +53,9 @@ struct MemoryBlock {
       size = 0;
       occupied = false;
 
-      if ( start_position != NULL ) {
-        delete ( start_position );
-        start_position = NULL;
+      if ( data != NULL ) {
+        delete ( data );
+        data = NULL;
       }
 
       if ( before != NULL ) {
@@ -68,5 +71,16 @@ struct MemoryBlock {
     }
 
 };
+
+void split(
+    MemoryBlockPtr overSizedBlock,
+    const size_t bytes,
+    bool overSizedBlockOccupied,
+    bool newBlockOccupied
+);
+
+void join(
+    MemoryBlockPtr newlyFreedBlock
+);
 
 #endif //HW06_MEMORYBLOCK_H
