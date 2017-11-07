@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <cstdlib>
+#include <iostream>
 #include "Allocator.h"
 #include "MemoryBlock.h"
 
@@ -14,7 +15,7 @@ using namespace std;
 
 class FirstFit : public Allocator {
 private:
-    vector< MemoryBlock > blocks;
+    MemoryBlock *block;
 
 public:
 
@@ -24,7 +25,10 @@ public:
 
     void dealloc( void *thing );
 
+    friend ostream &operator<<( ostream &out, const FirstFit &allocator );
 };
+
+ostream &operator<<( ostream &out, const FirstFit &allocator );
 
 
 #endif //HW06_FIRSTFIT_H
