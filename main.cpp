@@ -23,9 +23,9 @@ int main() {
 
   srand( 10021996 );
 
-  char *v1;
-  char *v2;
-  char *v3;
+  char *v1 = NULL;
+  char *v2 = NULL;
+  char *v3 = NULL;
 
   /* Local variables */
   Allocator *allocator;
@@ -56,11 +56,13 @@ int main() {
   /* Deallocate second block */
   cout << "Dealloc second block" << endl;
   allocator->dealloc( v2 );
+  v2 = NULL;
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
-  /* Allocate 10 bytes */
-  cout << "Alloc 10 bytes" << endl;
-  v2 = ( char * ) allocator->alloc( 10 );
+  /* Allocate 970 bytes */
+  cout << "Alloc 970 bytes" << endl;
+  v2 = ( char * ) allocator->alloc( 970 );
+  cout << "Return value: " << ( v2 == NULL ? "NULL" : "" ) << endl;
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   delete ( allocator );
