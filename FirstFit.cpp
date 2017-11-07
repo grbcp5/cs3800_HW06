@@ -78,3 +78,4 @@ ostream &operator<<( ostream &out, const FirstFit &allocator ) {
 
   return out;
 }
+
