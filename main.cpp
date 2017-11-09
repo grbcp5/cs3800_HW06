@@ -14,14 +14,68 @@
 #include <iostream>
 
 #include "FirstFit.h"
+#include "NextFit.h"
 
 using namespace std;
 
 /* Main */
 
+void testFirstFit();
+
+void testNextFit();
+
 int main() {
 
   srand( 10021996 );
+
+  testNextFit();
+
+}
+
+void testNextFit() {
+
+  char *v1 = NULL;
+//  char *v2 = NULL;
+//  char *v3 = NULL;
+
+  /* Local variables */
+  Allocator *allocator;
+
+  cout << "Test Next Fit" << endl << endl;
+
+  /* Create new allocator */
+  cout << "New allocator" << endl;
+  allocator = new NextFit();
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  ( char * ) allocator->alloc( 8 );
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  v1 = ( char * ) allocator->alloc( 8 );
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  ( char * ) allocator->alloc( 8 );
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+  /* Deallocate second block */
+  cout << "Dealloc second block" << endl;
+  allocator->dealloc( v1 );
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  ( char * ) allocator->alloc( 8 );
+  cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
+
+}
+
+void testFirstFit() {
 
   char *v1 = NULL;
   char *v2 = NULL;
@@ -66,4 +120,5 @@ int main() {
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   delete ( allocator );
+
 }

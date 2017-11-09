@@ -32,7 +32,10 @@ void join(
 
   MemoryBlockPtr consumedBlock;
 
-  if ( block->next != NULL && !block->next->occupied ) {
+  if ( block->next != NULL
+       && !block->next->occupied
+       && block->next != block
+      ) {
 
     consumedBlock = block->next;
 
@@ -42,7 +45,10 @@ void join(
 
   }
 
-  if ( block->before != NULL && !block->before->occupied ) {
+  if ( block->before != NULL
+       && !block->before->occupied
+       && block->before != block
+      ) {
 
     consumedBlock = block->before;
 
