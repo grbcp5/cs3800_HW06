@@ -20,11 +20,13 @@ TraceInputItem *TraceInput::getNextInputItem() {
   int block;
   TraceInputItem *result = new TraceInputItem();
 
+  fin >> num;
+
   if ( fin.eof()) {
     return NULL;
   }
 
-  fin >> num >> actionType >> block;
+  fin >> actionType >> block;
 
   result->num = num;
 
