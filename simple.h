@@ -16,7 +16,9 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 #include "Allocator.h"
+
 
 using namespace std;
 

@@ -12,6 +12,7 @@
  ******************************************************************************/
 
 #include <iostream>
+#include <cstring>
 
 #include "FirstFit.h"
 #include "NextFit.h"
@@ -130,7 +131,6 @@ void testFirstFit() {
 
   char *v1 = NULL;
   char *v2 = NULL;
-  char *v3 = NULL;
 
   /* Local variables */
   Allocator *allocator;
@@ -155,7 +155,7 @@ void testFirstFit() {
 
   /* Allocate 14 bytes */
   cout << "Allocate 32 bytes" << endl;
-  v3 = ( char * ) allocator->alloc( 32 );
+  ( char * ) allocator->alloc( 32 );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   /* Deallocate second block */
@@ -169,7 +169,5 @@ void testFirstFit() {
   v2 = ( char * ) allocator->alloc( 970 );
   cout << "Return value: " << ( v2 == NULL ? "NULL" : "" ) << endl;
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
-
-  delete ( allocator );
 
 }

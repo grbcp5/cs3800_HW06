@@ -5,7 +5,7 @@
 #ifndef HW06_MEMORYBLOCK_H
 #define HW06_MEMORYBLOCK_H
 
-#include <stdatomic.h>
+#include <cstdlib>
 
 /* Typedefs */
 struct MemoryBlock;
