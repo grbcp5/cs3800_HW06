@@ -91,3 +91,16 @@ ostream &operator<<( ostream &out, const BestFit &allocator ) {
   return out;
 
 }
+
+AllocatorMetaData BestFit::getMetaData() {
+
+  AllocatorMetaData data;
+
+  return data;
+}
+
+BestFit::~BestFit() {
+
+  delete ( block );
+
+}

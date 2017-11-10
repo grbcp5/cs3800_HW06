@@ -16,12 +16,17 @@ class BestFit : public Allocator {
 private:
     MemoryBlockPtr block;
 
+
 public:
     BestFit();
 
-    virtual void *alloc( size_t bytes ) override;
+    void *alloc( size_t bytes );
 
-    virtual void dealloc( void *thing ) override;
+    void dealloc( void *thing );
+
+    AllocatorMetaData getMetaData();
+
+    virtual ~BestFit();
 
     friend ostream &operator<<( ostream &out, const BestFit &allocator );
 };

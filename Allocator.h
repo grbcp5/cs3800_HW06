@@ -15,6 +15,7 @@
 #define HW06_ALLOCATOR_H
 
 #include <stdexcept>
+#include "DataRecording.h"
 
 #define DEFAULT_POOL_SIZE 1024
 
@@ -24,6 +25,8 @@ public:
     virtual void *alloc( size_t bytes ) = 0;
 
     virtual void dealloc( void *thing ) = 0;
+
+    virtual AllocatorMetaData getMetaData() = 0;
 
 };
 

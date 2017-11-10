@@ -104,3 +104,14 @@ ostream &operator<<( ostream &out, const NextFit &allocator ) {
 
   return out;
 }
+
+AllocatorMetaData NextFit::getMetaData() {
+
+  AllocatorMetaData data;
+
+  return data;
+}
+
+NextFit::~NextFit() {
+  delete ( block );
+}

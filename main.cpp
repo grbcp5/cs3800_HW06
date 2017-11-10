@@ -31,7 +31,7 @@ int main() {
 
   srand( 10021996 );
 
-  testBestFit();
+  testFirstFit();
 
 }
 

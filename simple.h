@@ -40,6 +40,10 @@ public:
 
     void dealloc( void *thing );
 
+    virtual AllocatorMetaData getMetaData();
+
+    ~Simple() {};
+
 };
 
 int simple_main();

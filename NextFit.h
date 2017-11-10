@@ -33,6 +33,10 @@ public:
 
     void dealloc( void *thing );
 
+    AllocatorMetaData getMetaData();
+
+    virtual ~NextFit();
+
     friend ostream &operator<<( ostream &out, const NextFit &allocator );
 
 };

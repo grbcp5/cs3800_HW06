@@ -25,6 +25,10 @@ public:
 
     void dealloc( void *thing );
 
+    AllocatorMetaData getMetaData();
+
+    ~FirstFit();
+
     friend ostream &operator<<( ostream &out, const FirstFit &allocator );
 };
 

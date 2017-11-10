@@ -19,6 +19,8 @@ void *FirstFit::alloc( size_t bytes ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
+  output( getMetaData());
+
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
     /* Skip if current block is occupied */
@@ -54,6 +56,8 @@ void FirstFit::dealloc( void *thing ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
+  output( getMetaData());
+
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
     if ( curBlock->data == thing ) {
@@ -78,5 +82,37 @@ ostream &operator<<( ostream &out, const FirstFit &allocator ) {
   }
 
   return out;
+}
+
+FirstFit::~FirstFit() {
+  delete ( block );
+}
+
+AllocatorMetaData FirstFit::getMetaData() {
+
+  /* Local variables */
+  MemoryBlockPtr curBlock;
+  AllocatorMetaData data;
+
+  for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
+
+    if ( !curBlock->occupied ) {
+
+      data.numFreeBytes += curBlock->size;
+      data.numFreeRegions++;
+
+      if ( curBlock->size > data.maxFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+      else if ( curBlock->size < data.minFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+
+    }
+
+  }
+
+  return data;
+
 }
 

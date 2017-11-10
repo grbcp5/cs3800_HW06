@@ -35,6 +35,13 @@ void Simple::dealloc( void *thing ) {
   // If we did deallocation, the code would go here
 }
 
+AllocatorMetaData Simple::getMetaData() {
+
+  AllocatorMetaData data;
+
+  return data;
+}
+
 int simple_main() {
   // In here, need to run through a trace of allocations and deallocations,
   // then record allocator efficiency stats.
