@@ -12,7 +12,6 @@
  ******************************************************************************/
 
 #include <iostream>
-#include <cstring>
 
 #include "FirstFit.h"
 #include "NextFit.h"
@@ -131,6 +130,7 @@ void testFirstFit() {
 
   char *v1 = NULL;
   char *v2 = NULL;
+  char *v3 = NULL;
 
   /* Local variables */
   Allocator *allocator;
@@ -139,23 +139,23 @@ void testFirstFit() {
   allocator = new FirstFit( "firstFitData.csv" );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
-  /* Allocate 10 bytes */
-  cout << "Allocate 10 bytes" << endl;
-  v1 = ( char * ) allocator->alloc( 10 );
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  v1 = ( char * ) allocator->alloc( 8 );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   /* Use allocated memory */
   strcpy( v1, "Hello" );
   cout << "V1: " << v1 << endl << endl;
 
-  /* Allocate 14 bytes */
-  cout << "Allocate 14 bytes" << endl;
-  v2 = ( char * ) allocator->alloc( 14 );
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  v2 = ( char * ) allocator->alloc( 8 );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
-  /* Allocate 14 bytes */
-  cout << "Allocate 32 bytes" << endl;
-  ( char * ) allocator->alloc( 32 );
+  /* Allocate 8 bytes */
+  cout << "Allocate 8 bytes" << endl;
+  v3 = ( char * ) allocator->alloc( 8 );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   /* Deallocate second block */
@@ -164,10 +164,16 @@ void testFirstFit() {
   v2 = NULL;
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
-  /* Allocate 970 bytes */
-  cout << "Alloc 970 bytes" << endl;
-  v2 = ( char * ) allocator->alloc( 970 );
-  cout << "Return value: " << ( v2 == NULL ? "NULL" : "" ) << endl;
+  /* Deallocate first block */
+  cout << "Dealloc first block" << endl;
+  allocator->dealloc( v1 );
+  v1 = NULL;
+  cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
+
+  /* Deallocate third block */
+  cout << "Dealloc third block" << endl;
+  allocator->dealloc( v3 );
+  v3 = NULL;
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
 }

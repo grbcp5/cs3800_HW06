@@ -79,7 +79,7 @@ void split(
     bool newBlockOccupied
 );
 
-void join(
+bool join(
     MemoryBlockPtr newlyFreedBlock
 );
 

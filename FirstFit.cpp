@@ -65,7 +65,9 @@ void FirstFit::dealloc( void *thing ) {
 
     if ( curBlock->data == thing ) {
       curBlock->occupied = false;
-      join( curBlock );
+      if ( join( curBlock )) {
+        block = curBlock;
+      }
       return;
     }
 

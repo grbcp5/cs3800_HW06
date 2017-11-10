@@ -26,7 +26,7 @@ void split(
 
 }
 
-void join(
+bool join(
     MemoryBlockPtr block
 ) {
 
@@ -42,6 +42,10 @@ void join(
     /* Consume following memory block into this memory block */
     block->size += consumedBlock->size;
     block->next = consumedBlock->next;
+
+    if ( consumedBlock->next != NULL ) {
+      consumedBlock->next->before = block;
+    }
 
   }
 
@@ -60,7 +64,12 @@ void join(
     if ( consumedBlock->before != NULL ) {
       consumedBlock->before->next = block;
     }
+    else {
+      return true;
+    }
 
   }
+
+  return false;
 
 }
