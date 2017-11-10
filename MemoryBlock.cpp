@@ -24,6 +24,10 @@ void split(
   overSizedBlock->occupied = overSizedBlockOccupied;
   overSizedBlock->next = newBlock;
 
+  if ( newBlock->next != NULL ) {
+    newBlock->next->before = newBlock;
+  }
+
 }
 
 bool join(
