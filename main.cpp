@@ -16,6 +16,7 @@
 #include "FirstFit.h"
 #include "NextFit.h"
 #include "BestFit.h"
+#include "TraceInput.h"
 
 using namespace std;
 
@@ -27,11 +28,40 @@ void testNextFit();
 
 void testBestFit();
 
+void testInput();
+
 int main() {
 
   srand( 10021996 );
 
-  testFirstFit();
+  testInput();
+
+}
+
+void testInput() {
+
+  TraceInput input( "trace.txt" );
+  TraceInputItem *inputItem;
+
+  inputItem = input.getNextInputItem();
+
+  while ( inputItem != NULL ) {
+
+    switch ( inputItem->actionType ) {
+      case ALLOCATE:
+
+        cout << inputItem->num << ": Alloc " << inputItem->block.size << endl;
+
+        break;
+      case DEALLOCATE:
+
+        cout << "Dealloc block " << inputItem->block.num << endl;
+
+        break;
+    }
+
+    inputItem = input.getNextInputItem();
+  }
 
 }
 
