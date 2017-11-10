@@ -24,6 +24,8 @@ void *NextFit::alloc( size_t bytes ) {
   MemoryBlockPtr curBlock;
   MemoryBlockPtr endBlock;
 
+  //output( getMetaData() );
+
   for ( curBlock = block, endBlock = NULL;           // Initialize
         curBlock != endBlock;                        // Condition
         curBlock = curBlock->next, endBlock = block  // Iterate
@@ -67,6 +69,8 @@ void NextFit::dealloc( void *thing ) {
   MemoryBlockPtr curBlock;
   MemoryBlockPtr endBlock;
 
+  //output( getMetaData() );
+
   for ( curBlock = block, endBlock = NULL;           // Initialize
         curBlock != endBlock;                        // Condition
         curBlock = curBlock->next, endBlock = block  // Iterate
@@ -108,6 +112,31 @@ ostream &operator<<( ostream &out, const NextFit &allocator ) {
 AllocatorMetaData NextFit::getMetaData() {
 
   AllocatorMetaData data;
+
+  /* Local variables */
+  MemoryBlockPtr curBlock;
+  MemoryBlockPtr endBlock;
+
+  for ( curBlock = block, endBlock = NULL;           // Initialize
+        curBlock != endBlock;                        // Condition
+        curBlock = curBlock->next, endBlock = block  // Iterate
+      ) {
+
+    if ( !curBlock->occupied ) {
+
+      data.numFreeBytes += curBlock->size;
+      data.numFreeRegions++;
+
+      if ( curBlock->size > data.maxFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+      else if ( curBlock->size < data.minFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+
+    }
+
+  }
 
   return data;
 }

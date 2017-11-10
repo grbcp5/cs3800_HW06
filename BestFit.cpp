@@ -22,6 +22,8 @@ void *BestFit::alloc( size_t bytes ) {
 
   bestFit = NULL;
 
+  //output( getMetaData() );
+
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
     /* Skip if current block is occupied */
@@ -65,6 +67,8 @@ void BestFit::dealloc( void *thing ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
+  //output( getMetaData() ); 
+
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
     if ( curBlock->data == thing ) {
@@ -95,6 +99,27 @@ ostream &operator<<( ostream &out, const BestFit &allocator ) {
 AllocatorMetaData BestFit::getMetaData() {
 
   AllocatorMetaData data;
+
+  /* Local variables */
+  MemoryBlockPtr curBlock;
+
+  for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
+
+   if ( !curBlock->occupied ) {
+
+      data.numFreeBytes += curBlock->size;
+      data.numFreeRegions++;
+
+      if ( curBlock->size > data.maxFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+      else if ( curBlock->size < data.minFreeRegionSize ) {
+        data.maxFreeRegionSize = curBlock->size;
+      }
+
+    } 
+
+  }
 
   return data;
 }

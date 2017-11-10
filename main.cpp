@@ -136,7 +136,7 @@ void testFirstFit() {
   Allocator *allocator;
 
   /* Create new allocator */
-  allocator = new FirstFit();
+  allocator = new FirstFit( "firstFitData.csv" );
   cout << ( *dynamic_cast<FirstFit *>( allocator )) << endl;
 
   /* Allocate 10 bytes */

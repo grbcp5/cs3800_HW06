@@ -10,16 +10,18 @@
 #include <iostream>
 #include "Allocator.h"
 #include "MemoryBlock.h"
+#include "DataRecording.h"
 
 using namespace std;
 
 class FirstFit : public Allocator {
 private:
     MemoryBlock *block;
+    DataRecording output;
 
 public:
 
-    FirstFit();
+    FirstFit( const char* fileName );
 
     void *alloc( size_t bytes );
 

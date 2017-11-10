@@ -37,6 +37,6 @@ public:
 
 ostream &operator<<( ostream &out, const AllocatorMetaData &data );
 
-void output( const AllocatorMetaData data );
+//void output( const AllocatorMetaData data );
 
 #endif //HW06_DATARECORDING_H

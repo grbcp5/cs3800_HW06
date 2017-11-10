@@ -6,7 +6,10 @@
 
 using namespace std;
 
-FirstFit::FirstFit() : block( NULL ) {
+FirstFit::FirstFit( const char* fileName ) 
+  : block( NULL ), 
+  output( fileName )
+  {
   block = new MemoryBlock(
       DEFAULT_POOL_SIZE,
       ( byte * ) malloc( DEFAULT_POOL_SIZE ),
@@ -19,7 +22,7 @@ void *FirstFit::alloc( size_t bytes ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
-  output( getMetaData());
+  output.outputData( getMetaData());
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
@@ -56,7 +59,7 @@ void FirstFit::dealloc( void *thing ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
-  output( getMetaData());
+  output.outputData( getMetaData());
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
