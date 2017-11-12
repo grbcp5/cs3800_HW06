@@ -95,7 +95,7 @@ void testNextFit() {
 
   /* Create new allocator */
   cout << "New allocator" << endl;
-  allocator = new NextFit();
+  allocator = new NextFit( "" );
   cout << ( *dynamic_cast<NextFit *>( allocator )) << endl;
 
   /* Allocate 8 bytes */

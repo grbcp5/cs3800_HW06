@@ -19,7 +19,7 @@ struct AllocatorMetaData {
         numFreeBytes( 0 ),
         numFreeRegions( 0 ),
         maxFreeRegionSize( 0 ),
-        minFreeRegionSize( 0 ) {}
+        minFreeRegionSize( 1025 ) {}
 
 };
 

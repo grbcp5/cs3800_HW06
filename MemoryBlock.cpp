@@ -72,8 +72,70 @@ bool join(
       return true;
     }
 
+    if ( consumedBlock->before == block ) {
+      return true;
+    }
+
   }
 
+
   return false;
+
+}
+
+bool join(
+    MemoryBlockPtr block,
+    MemoryBlockPtr ref
+) {
+
+  bool consumedRef;
+  MemoryBlockPtr consumedBlock;
+
+  consumedRef = false;
+
+  if ( block->next != NULL
+       && !block->next->occupied
+       && block->next != block
+      ) {
+
+    consumedBlock = block->next;
+
+    /* Consume following memory block into this memory block */
+    block->size += consumedBlock->size;
+    block->next = consumedBlock->next;
+
+    if ( consumedBlock->next != NULL ) {
+      consumedBlock->next->before = block;
+    }
+
+    if ( consumedBlock == ref ) {
+      consumedRef = true;
+    }
+
+  }
+
+  if ( block->before != NULL
+       && !block->before->occupied
+       && block->before != block
+      ) {
+
+    consumedBlock = block->before;
+
+    /* Consume proceeding memory block into this memory block */
+    block->size += consumedBlock->size;
+    block->data = consumedBlock->data;
+    block->before = consumedBlock->before;
+
+    if ( consumedBlock->before != NULL ) {
+      consumedBlock->before->next = block;
+    }
+
+    if ( consumedBlock == ref ) {
+      consumedRef = true;
+    }
+
+  }
+
+  return consumedRef;
 
 }

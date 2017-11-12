@@ -15,19 +15,23 @@
 #define HW06_NEXTFIT_H
 
 #include <iostream>
+#include <sstream>
 
 #include "Allocator.h"
 #include "MemoryBlock.h"
+#include "DataRecording.h"
 
 using namespace std;
 
 class NextFit : public Allocator {
 private:
     MemoryBlock *block;
+    DataRecording output;
+
 
 public:
 
-    NextFit();
+    NextFit( const char *fileName );
 
     void *alloc( size_t bytes );
 
@@ -36,6 +40,8 @@ public:
     AllocatorMetaData getMetaData();
 
     virtual ~NextFit();
+
+    string toString();
 
     friend ostream &operator<<( ostream &out, const NextFit &allocator );
 

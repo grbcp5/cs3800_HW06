@@ -2,7 +2,7 @@ default: buildAndRun
 
 build:
 	mkdir -p bin
-	fg++ *.cpp -o bin/a.out
+	g++ *.cpp -o bin/a.out
 
 run:
 	./bin/a.out

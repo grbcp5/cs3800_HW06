@@ -83,4 +83,9 @@ bool join(
     MemoryBlockPtr newlyFreedBlock
 );
 
+bool join(
+    MemoryBlockPtr newlyFreedBlock,
+    MemoryBlockPtr ref
+);
+
 #endif //HW06_MEMORYBLOCK_H
