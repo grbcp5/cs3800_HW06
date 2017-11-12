@@ -13,8 +13,8 @@ DataRecording::DataRecording( const char *outFileName )
 
   out << "Free Bytes,"
       << " Free Regions,"
-      << " Max Free Region Size,"
-      << " Min Free Region Size\n";
+      << " Min Free Region Size,"
+      << " Max Free Region Size\n";
 }
 
 void DataRecording::outputData( const AllocatorMetaData data ) {
@@ -28,8 +28,8 @@ DataRecording::~DataRecording() {
 ostream &operator<<( ostream &o, const AllocatorMetaData &data ) {
   o << data.numFreeBytes << ", "
     << data.numFreeRegions << ", "
-    << data.maxFreeRegionSize << ", "
-    << data.minFreeRegionSize;
+    << data.minFreeRegionSize << ", "
+    << data.maxFreeRegionSize;
 
   return o;
 }

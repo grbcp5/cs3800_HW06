@@ -117,8 +117,9 @@ AllocatorMetaData BestFit::getMetaData() {
       if ( curBlock->size > data.maxFreeRegionSize ) {
         data.maxFreeRegionSize = ( unsigned int ) curBlock->size;
       }
-      else if ( curBlock->size < data.minFreeRegionSize ) {
-        data.maxFreeRegionSize = ( unsigned int ) curBlock->size;
+
+      if ( curBlock->size < data.minFreeRegionSize ) {
+        data.minFreeRegionSize = ( unsigned int ) curBlock->size;
       }
 
     }

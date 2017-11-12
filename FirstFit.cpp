@@ -22,7 +22,8 @@ void *FirstFit::alloc( size_t bytes ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
-  output.outputData( getMetaData());
+  AllocatorMetaData data = getMetaData();
+  output.outputData( data );
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
@@ -107,10 +108,11 @@ AllocatorMetaData FirstFit::getMetaData() {
       data.numFreeRegions++;
 
       if ( curBlock->size > data.maxFreeRegionSize ) {
-        data.maxFreeRegionSize = curBlock->size;
+        data.maxFreeRegionSize = ( unsigned int ) curBlock->size;
       }
-      else if ( curBlock->size < data.minFreeRegionSize ) {
-        data.maxFreeRegionSize = curBlock->size;
+
+      if ( curBlock->size < data.minFreeRegionSize ) {
+        data.minFreeRegionSize = ( unsigned int ) curBlock->size;
       }
 
     }
