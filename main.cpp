@@ -37,9 +37,9 @@ int main() {
 
   const int NUM_ALLOCATORS = 3;
   AllocatorPtr allocators[NUM_ALLOCATORS] = {
-      new FirstFit( "firstFit.csv" ),
-      new NextFit( "nextFit.csv" ),
-      new BestFit( "bestFit.csv" )
+      new FirstFit( "out/firstFit.csv" ),
+      new NextFit( "out/nextFit.csv" ),
+      new BestFit( "out/bestFit.csv" )
   };
   AllocatorType types[NUM_ALLOCATORS] = {
       FIRST_FIT,
@@ -56,7 +56,7 @@ int main() {
 
 void testAllocator( AllocatorType type, Allocator *allocator ) {
 
-  TraceInput input( "trace.txt" );
+  TraceInput input( "in/trace.txt" );
   TraceInputItem *inputItem;
   vector< char * > refs;
   char *ref;
