@@ -30,6 +30,8 @@ public:
 
 };
 
+typedef Allocator *AllocatorPtr;
+
 
 
 /* BEGIN DIVERSION */

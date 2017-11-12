@@ -30,15 +30,35 @@ enum AllocatorType {
 
 void print( AllocatorType type, Allocator *allocator );
 
+void testAllocator( AllocatorType type, Allocator *allocator );
+
 /* Main */
 int main() {
 
-  srand( 10021996 );
+  const int NUM_ALLOCATORS = 3;
+  AllocatorPtr allocators[NUM_ALLOCATORS] = {
+      new FirstFit( "firstFit.csv" ),
+      new NextFit( "nextFit.csv" ),
+      new BestFit( "bestFit.csv" )
+  };
+  AllocatorType types[NUM_ALLOCATORS] = {
+      FIRST_FIT,
+      NEXT_FIT,
+      BEST_FIT
+  };
+
+  for ( int i = 0; i < NUM_ALLOCATORS; ++i ) {
+    testAllocator( types[ i ], allocators[ i ] );
+  }
+
+
+}
+
+void testAllocator( AllocatorType type, Allocator *allocator ) {
 
   TraceInput input( "trace.txt" );
   TraceInputItem *inputItem;
   vector< char * > refs;
-  Allocator *allocator = new BestFit( "bestFit.csv" );
   char *ref;
 
   inputItem = input.getNextInputItem();
@@ -52,7 +72,7 @@ int main() {
         ref = ( char * ) allocator->alloc(( size_t ) inputItem->block.size );
         strcpy( ref, to_string( inputItem->num ).c_str());
         refs.push_back( ref );
-        print( BEST_FIT, allocator );
+        print( type, allocator );
 
         break;
       case DEALLOCATE:
@@ -61,14 +81,13 @@ int main() {
         allocator->dealloc(
             refs.at(( unsigned long ) inputItem->block.num )
         );
-        print( BEST_FIT, allocator );
+        print( type, allocator );
 
         break;
     }
 
     inputItem = input.getNextInputItem();
   }
-
 
 }
 
