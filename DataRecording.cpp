@@ -10,6 +10,11 @@ DataRecording::DataRecording( const char *outFileName )
 
   if ( !out.is_open())
     throw int( 0 );
+
+  out << "Free Bytes,"
+      << " Free Regions,"
+      << " Max Free Region Size,"
+      << " Min Free Region Size\n";
 }
 
 void DataRecording::outputData( const AllocatorMetaData data ) {
