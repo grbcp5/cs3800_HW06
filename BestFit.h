@@ -9,16 +9,18 @@
 #include <iostream>
 #include "Allocator.h"
 #include "MemoryBlock.h"
+#include "DataRecording.h"
 
 using namespace std;
 
 class BestFit : public Allocator {
 private:
     MemoryBlockPtr block;
+    DataRecording output;
 
 
 public:
-    BestFit();
+    BestFit( const char *fileName );
 
     void *alloc( size_t bytes );
 

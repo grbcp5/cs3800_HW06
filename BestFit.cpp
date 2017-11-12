@@ -4,7 +4,9 @@
 
 #include "BestFit.h"
 
-BestFit::BestFit() : block( NULL ) {
+BestFit::BestFit( const char *fileName )
+    : block( NULL ),
+      output( fileName ) {
 
   block = new MemoryBlock(
       DEFAULT_POOL_SIZE,
@@ -22,7 +24,7 @@ void *BestFit::alloc( size_t bytes ) {
 
   bestFit = NULL;
 
-  //output( getMetaData() );
+  output.outputData( getMetaData());
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
@@ -67,7 +69,7 @@ void BestFit::dealloc( void *thing ) {
   /* Local variables */
   MemoryBlockPtr curBlock;
 
-  //output( getMetaData() ); 
+  output.outputData( getMetaData());
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
@@ -107,19 +109,19 @@ AllocatorMetaData BestFit::getMetaData() {
 
   for ( curBlock = block; curBlock != NULL; curBlock = curBlock->next ) {
 
-   if ( !curBlock->occupied ) {
+    if ( !curBlock->occupied ) {
 
       data.numFreeBytes += curBlock->size;
       data.numFreeRegions++;
 
       if ( curBlock->size > data.maxFreeRegionSize ) {
-        data.maxFreeRegionSize = curBlock->size;
+        data.maxFreeRegionSize = ( unsigned int ) curBlock->size;
       }
       else if ( curBlock->size < data.minFreeRegionSize ) {
-        data.maxFreeRegionSize = curBlock->size;
+        data.maxFreeRegionSize = ( unsigned int ) curBlock->size;
       }
 
-    } 
+    }
 
   }
 

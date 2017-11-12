@@ -44,7 +44,7 @@ void testBestFit() {
   cout << "\nTest Best Fit\n" << endl;
 
   cout << "New allocator" << endl;
-  allocator = new BestFit();
+  allocator = new BestFit( "" );
   cout << ( *dynamic_cast<BestFit *>( allocator )) << endl;
 
   /* Allocate 16 bytes */

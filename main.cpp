@@ -38,7 +38,7 @@ int main() {
   TraceInput input( "trace.txt" );
   TraceInputItem *inputItem;
   vector< char * > refs;
-  Allocator *allocator = new NextFit( "nextFit.csv" );
+  Allocator *allocator = new BestFit( "bestFit.csv" );
   char *ref;
 
   inputItem = input.getNextInputItem();
@@ -52,7 +52,7 @@ int main() {
         ref = ( char * ) allocator->alloc(( size_t ) inputItem->block.size );
         strcpy( ref, to_string( inputItem->num ).c_str());
         refs.push_back( ref );
-        print( NEXT_FIT, allocator );
+        print( BEST_FIT, allocator );
 
         break;
       case DEALLOCATE:
@@ -61,7 +61,7 @@ int main() {
         allocator->dealloc(
             refs.at(( unsigned long ) inputItem->block.num )
         );
-        print( NEXT_FIT, allocator );
+        print( BEST_FIT, allocator );
 
         break;
     }
