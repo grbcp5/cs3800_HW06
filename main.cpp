@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 #include "TraceInput.h"
 #include "Allocator.h"
@@ -31,6 +32,16 @@ enum AllocatorType {
 void print( AllocatorType type, Allocator *allocator );
 
 void testAllocator( AllocatorType type, Allocator *allocator );
+
+namespace patch {
+
+  template <typename T> std::string to_string( const T& n ) {
+    std::ostringstream oss;
+    oss << n;
+    return oss.str();
+  }
+
+}
 
 /* Main */
 int main() {
@@ -70,7 +81,7 @@ void testAllocator( AllocatorType type, Allocator *allocator ) {
 
         cout << inputItem->num << ": Alloc " << inputItem->block.size << endl;
         ref = ( char * ) allocator->alloc(( size_t ) inputItem->block.size );
-        strcpy( ref, to_string( inputItem->num ).c_str());
+        strcpy( ref, patch::to_string( inputItem->num ).c_str());
         refs.push_back( ref );
         print( type, allocator );
 
